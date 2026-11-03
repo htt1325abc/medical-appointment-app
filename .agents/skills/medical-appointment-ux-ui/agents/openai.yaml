@@ -1,0 +1,4 @@
+interface:
+  display_name: "Medical Appointment UX UI"
+  short_description: "Design and build polished Flutter healthcare interfaces"
+  default_prompt: "Design or implement the requested Flutter screen using the medical appointment UX and visual system."
