@@ -16,8 +16,9 @@ class MobileFrame extends StatelessWidget {
         child: LayoutBuilder(
           builder: (context, constraints) {
             final isCanvas = constraints.maxWidth > 480;
+            final canvasPadding = isCanvas ? AppSpacing.lg * 2 : 0.0;
             final frameHeight = isCanvas
-                ? constraints.maxHeight.clamp(640.0, 852.0)
+                ? (constraints.maxHeight - canvasPadding).clamp(0.0, 852.0)
                 : constraints.maxHeight;
             return Padding(
               padding: EdgeInsets.all(isCanvas ? AppSpacing.lg : 0),

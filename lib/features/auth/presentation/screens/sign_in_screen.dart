@@ -10,11 +10,13 @@ class SignInScreen extends StatefulWidget {
   const SignInScreen({
     required this.onCreateAccount,
     required this.onForgotPassword,
+    required this.onSignedIn,
     super.key,
   });
 
   final VoidCallback onCreateAccount;
   final VoidCallback onForgotPassword;
+  final VoidCallback onSignedIn;
 
   @override
   State<SignInScreen> createState() => _SignInScreenState();
@@ -35,8 +37,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
   void _submit() {
     if (!(_formKey.currentState?.validate() ?? false)) return;
-    ScaffoldMessenger.of(context)
-        .showSnackBar(const SnackBar(content: Text('Đăng nhập thành công')));
+    widget.onSignedIn();
   }
 
   @override

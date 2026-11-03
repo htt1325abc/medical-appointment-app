@@ -7,7 +7,9 @@ import 'screens/sign_up_screen.dart';
 enum AuthStep { signIn, signUp, forgotPassword, otp, resetPassword, success }
 
 class AuthFlow extends StatefulWidget {
-  const AuthFlow({super.key});
+  const AuthFlow({required this.onSignedIn, super.key});
+
+  final VoidCallback onSignedIn;
 
   @override
   State<AuthFlow> createState() => _AuthFlowState();
@@ -25,6 +27,7 @@ class _AuthFlowState extends State<AuthFlow> {
       AuthStep.signIn => SignInScreen(
         onCreateAccount: () => _goTo(AuthStep.signUp),
         onForgotPassword: () => _goTo(AuthStep.forgotPassword),
+        onSignedIn: widget.onSignedIn,
       ),
       AuthStep.signUp => SignUpScreen(
         onBack: () => _goTo(AuthStep.signIn),
