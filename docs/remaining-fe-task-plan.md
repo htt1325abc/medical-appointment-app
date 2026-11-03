@@ -1,6 +1,6 @@
 # Kế hoạch triển khai toàn bộ FE còn lại — MediCare+
 
-> Trạng thái: **Đang triển khai — Đợt 1 chờ duyệt trên thiết bị**  
+> Trạng thái: **Đã hoàn thiện FE mock — chờ duyệt hình ảnh trên thiết bị**
 > Cập nhật: 03/11/2026  
 > Nguồn thiết kế chuẩn: [Figma MediCare+](https://www.figma.com/design/4Ejk0nWovXheXQwjLDJ6tB/Untitled?node-id=0-1&p=f&t=BsDPD6cdnM7RReZz-0)
 
@@ -16,10 +16,10 @@
 
 | Vai trò | Tổng frame Figma | Đã hoàn thành | Còn lại |
 |---|---:|---:|---:|
-| Patient | 41 | 6 màn xác thực `05–10` | 35 |
-| Doctor | 28 | 0 | 28 |
-| Admin | 27 | 0 | 27 |
-| **Tổng** | **96** | **6** | **90** |
+| Patient | 41 | 41 | 0 |
+| Doctor | 28 | 28 | 0 |
+| Admin | 27 | 27 | 0 |
+| **Tổng** | **96** | **96** | **0** |
 
 Các màn Patient đã có: Tạo tài khoản, Đăng nhập, Quên mật khẩu, Nhập mã xác thực, Đặt lại mật khẩu và Hoàn tất đăng ký.
 
@@ -28,8 +28,19 @@ Các màn Patient đã có: Tạo tài khoản, Đăng nhập, Quên mật khẩ
 - [x] `FE-00`: router, mock data, component trạng thái và screen catalog debug.
 - [x] `PAT-01`: Splash và ba màn onboarding.
 - [x] `PAT-02`: Home, tìm chuyên khoa, danh sách Nội khoa và hồ sơ bác sĩ.
-- [ ] Đợt 1 được duyệt trên Xiaomi Mi 8 SE.
-- [ ] Đợt 2 và các đợt tiếp theo.
+- [x] `PAT-03` đến `PAT-08`: đặt lịch, tư vấn, sức khỏe, bệnh viện và tài khoản.
+- [x] `DOC-01` đến `DOC-08`: toàn bộ 28 màn Doctor.
+- [x] `ADM-01` đến `ADM-08`: toàn bộ 27 màn Admin và layout desktop responsive.
+- [x] Có catalog 96 màn, luồng CTA mock và bộ mô phỏng loading/empty/error/offline/retry.
+- [x] Kiểm tra tự động 82 màn mới ở viewport hẹp `360 × 800` và Admin `1280 × 900`.
+- [ ] Duyệt hình ảnh cuối cùng trên Xiaomi Mi 8 SE và ghi nhận phản hồi của giảng viên/người dùng.
+
+### Cách mở nhanh toàn bộ màn để duyệt
+
+1. Ở Trang chủ Patient, **nhấn giữ avatar** để mở kho giao diện.
+2. Kho giao diện chia ba nhóm Patient, Doctor và Admin; chạm vào tên frame để mở trực tiếp.
+3. Trong mỗi màn dữ liệu, mở nút `…` trên thanh tiêu đề để kiểm tra các trạng thái loading, empty, error và offline.
+4. CTA màu xanh chạy theo chuỗi nghiệp vụ chính; thanh điều hướng dưới mở lại catalog để đổi nhanh sang màn khác.
 
 ## 2. Nguyên tắc triển khai
 

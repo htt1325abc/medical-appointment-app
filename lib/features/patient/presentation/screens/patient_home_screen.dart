@@ -11,13 +11,25 @@ class PatientHomeScreen extends StatelessWidget {
   const PatientHomeScreen({
     required this.onOpenSpecialties,
     required this.onOpenInternalMedicine,
+    required this.onOpenBooking,
+    required this.onOpenConsultation,
+    required this.onOpenHealthRecord,
+    required this.onOpenAppointments,
+    required this.onOpenNotifications,
     required this.onOpenProfile,
+    required this.onOpenCatalog,
     super.key,
   });
 
   final VoidCallback onOpenSpecialties;
   final VoidCallback onOpenInternalMedicine;
+  final VoidCallback onOpenBooking;
+  final VoidCallback onOpenConsultation;
+  final VoidCallback onOpenHealthRecord;
+  final VoidCallback onOpenAppointments;
+  final VoidCallback onOpenNotifications;
   final VoidCallback onOpenProfile;
+  final VoidCallback onOpenCatalog;
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +46,18 @@ class PatientHomeScreen extends StatelessWidget {
               AppSpacing.lg,
             ),
             children: [
-              _WelcomeHeader(onAvatarTap: onOpenProfile),
+              _WelcomeHeader(
+                onAvatarTap: onOpenProfile,
+                onAvatarLongPress: onOpenCatalog,
+              ),
               const SizedBox(height: 22),
               _SearchEntry(onTap: onOpenSpecialties),
               const SizedBox(height: 16),
-              _QuickActions(onOpenInternalMedicine: onOpenInternalMedicine),
+              _QuickActions(
+                onOpenBooking: onOpenBooking,
+                onOpenConsultation: onOpenConsultation,
+                onOpenHealthRecord: onOpenHealthRecord,
+              ),
               const SizedBox(height: 20),
               Text(
                 'Chuyên khoa phổ biến',
@@ -57,15 +76,9 @@ class PatientHomeScreen extends StatelessWidget {
         bottomNavigationBar: PatientBottomNavigation(
           selectedIndex: 0,
           onSelected: (index) {
-            if (index == 3) {
-              onOpenProfile();
-              return;
-            }
-            if (index != 0) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Màn này sẽ có ở đợt tiếp theo')),
-              );
-            }
+            if (index == 1) onOpenAppointments();
+            if (index == 2) onOpenNotifications();
+            if (index == 3) onOpenProfile();
           },
         ),
       ),
@@ -74,9 +87,13 @@ class PatientHomeScreen extends StatelessWidget {
 }
 
 class _WelcomeHeader extends StatelessWidget {
-  const _WelcomeHeader({required this.onAvatarTap});
+  const _WelcomeHeader({
+    required this.onAvatarTap,
+    required this.onAvatarLongPress,
+  });
 
   final VoidCallback onAvatarTap;
+  final VoidCallback onAvatarLongPress;
 
   @override
   Widget build(BuildContext context) {
@@ -84,6 +101,7 @@ class _WelcomeHeader extends StatelessWidget {
       children: [
         InkWell(
           onTap: onAvatarTap,
+          onLongPress: onAvatarLongPress,
           customBorder: const CircleBorder(),
           child: Container(
             width: 42,
@@ -157,9 +175,15 @@ class _SearchEntry extends StatelessWidget {
 }
 
 class _QuickActions extends StatelessWidget {
-  const _QuickActions({required this.onOpenInternalMedicine});
+  const _QuickActions({
+    required this.onOpenBooking,
+    required this.onOpenConsultation,
+    required this.onOpenHealthRecord,
+  });
 
-  final VoidCallback onOpenInternalMedicine;
+  final VoidCallback onOpenBooking;
+  final VoidCallback onOpenConsultation;
+  final VoidCallback onOpenHealthRecord;
 
   @override
   Widget build(BuildContext context) {
@@ -173,13 +197,11 @@ class _QuickActions extends StatelessWidget {
         for (var index = 0; index < actions.length; index++) ...[
           Expanded(
             child: InkWell(
-              onTap: index == 0
-                  ? onOpenInternalMedicine
-                  : () => ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Màn này sẽ có ở đợt tiếp theo'),
-                      ),
-                    ),
+              onTap: [
+                onOpenBooking,
+                onOpenConsultation,
+                onOpenHealthRecord,
+              ][index],
               borderRadius: BorderRadius.circular(12),
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 4),
