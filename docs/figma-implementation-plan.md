@@ -36,12 +36,13 @@ Figma luôn thắng khi có xung đột với token tạm trong code hoặc skil
 
 | Nhóm token | Giá trị triển khai |
 | --- | --- |
-| Primary / secondary / status colors | `TBD-FIGMA` |
-| Background / surface / border | `TBD-FIGMA` |
-| Font family và type scale | `TBD-FIGMA` |
-| Spacing scale | Dùng hệ 4/8 tạm thời, thay bằng số đo Figma khi đọc được layer |
-| Radius / elevation | `TBD-FIGMA` |
-| Icon set | Một bộ icon nét đồng nhất; xác nhận lại từ Figma |
+| Primary / deep / ink | `#069ACA` / `#006DA5` / `#101B32` |
+| Muted / soft / background / border | `#6F839E` / `#EDF7FC` / `#FAFDFF` / `#DCE8F0` |
+| Success / danger / warning | `#20C98B` / `#F85663` / `#FFAF1A` |
+| Font family và type scale | Inter; `10 / 11 / 12 / 14 / 16 / 18 / 20 / 24 / 28 / 32` |
+| Spacing scale | Hệ 4/8; form content rộng `345`, lề ngang `24`, gap chính `16` |
+| Radius | Input `10`; mobile presentation frame `24`; các radius khác tiếp tục đọc theo component |
+| Icon set | Icon nét đồng nhất theo Design System MediCare+; Flutter dùng Material equivalents khi không có SVG riêng |
 
 Không lấy màu trực tiếp từ thumbnail bằng công cụ eyedropper vì ảnh đã bị scale/compress.
 
@@ -224,10 +225,10 @@ AI chat, thanh toán, hồ sơ bệnh án đầy đủ và notification nâng ca
 
 Chỉ cần cập nhật các mục này, không phải lập lại plan:
 
-- [ ] Tên và weight font, line height, letter spacing.
-- [ ] Hex/opacity của semantic colors và status colors.
-- [ ] Spacing scale, grid, page padding và card gaps.
-- [ ] Radius, border width, shadow/elevation.
+- [x] Tên font, type scale, title/body weight và line height nền tảng.
+- [x] Hex của semantic colors chính và status colors.
+- [x] Form width, page padding và gap nền tảng của auth.
+- [ ] Radius, border width, shadow/elevation cho toàn bộ component ngoài auth.
 - [ ] Kích thước icon/avatar/illustration và asset export.
 - [ ] Frame-to-route mapping và copy chính xác từng màn hình.
 - [ ] Prototype transitions, modal/bottom-sheet behavior.

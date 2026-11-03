@@ -13,16 +13,16 @@ Before UI work, read `docs/figma-implementation-plan.md`. Treat it as the reposi
 
 Use the concept **A calm path to care**. The signature element is a continuous care-path line that connects discovery, booking, confirmation, and completion. Reuse it selectively for appointment progress and status history; do not turn every screen into a timeline.
 
-Use these semantic tokens only as a fallback until the Figma values are extracted:
+Use the extracted MediCare+ tokens from Figma:
 
-- Ink `#12312B`: primary text and high-emphasis surfaces.
-- Care `#1F7A68`: primary actions and confirmed states.
-- Mint `#DFF3EC`: supportive backgrounds and selected states.
-- Apricot `#FFB86B`: warm highlights and pending states.
-- Cloud `#F7FAF9`: app background.
-- Danger `#C94A4A`: destructive actions and rejected states.
+- Primary `#069ACA` and deep `#006DA5`: actions, links, and active navigation.
+- Ink `#101B32`: primary text and high-emphasis surfaces.
+- Muted `#6F839E`: secondary text and inactive content.
+- Soft `#EDF7FC`: input and supportive surfaces.
+- Success `#20C98B`, danger `#F85663`, warning `#FFAF1A`.
+- App background `#FAFDFF`; border `#DCE8F0`.
 
-Prefer Be Vietnam Pro for display roles and Inter for body, controls, and data when font assets are available. Ensure every chosen font contains complete Vietnamese glyphs. Use a disciplined type scale, generous line height, and tabular figures for times, dates, and appointment identifiers.
+Use Inter for all text. The Figma type scale is 10, 11, 12, 14, 16, 18, 20, 24, 28, and 32 px with 145% line height for the inspected auth styles. Ensure complete Vietnamese glyph support and use tabular figures for times, dates, OTP, and appointment identifiers.
 
 Use soft geometry with deliberate contrast: large surfaces may use 20-24 px radii, controls 12-16 px, and compact status chips fully rounded. Avoid stacking cards inside cards, excessive shadows, ornamental gradients, glass effects, or random radius values. Icons must communicate meaning without relying on emoji.
 
