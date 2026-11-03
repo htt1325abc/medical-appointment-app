@@ -120,7 +120,7 @@ class _WelcomeHeader extends StatelessWidget {
         const SizedBox(width: 12),
         Expanded(
           child: Text(
-            'Xin chào, Nguyễn Thảo Ly',
+            'Xin chào, Huỳnh Tuấn Tú',
             style: Theme.of(context).textTheme.titleMedium,
           ),
         ),

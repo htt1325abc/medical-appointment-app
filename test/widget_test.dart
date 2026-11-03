@@ -65,7 +65,7 @@ void main() {
     await tester.tap(find.text('Đăng nhập'));
     await tester.pumpAndSettle();
 
-    expect(find.text('Xin chào, Nguyễn Thảo Ly'), findsOneWidget);
+    expect(find.text('Xin chào, Huỳnh Tuấn Tú'), findsOneWidget);
     expect(find.text('Chuyên khoa phổ biến'), findsOneWidget);
 
     await tester.tap(find.text('Nội khoa').first);
