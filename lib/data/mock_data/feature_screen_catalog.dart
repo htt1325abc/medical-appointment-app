@@ -527,7 +527,7 @@ abstract final class FeatureScreenCatalog {
         'Bệnh nhân tháng này · 126',
       ],
       primaryAction: 'Xem lịch hôm nay',
-      nextScreenId: 'D05',
+      nextScreenId: 'D04',
     ),
     ScreenSpec(
       id: 'D21',

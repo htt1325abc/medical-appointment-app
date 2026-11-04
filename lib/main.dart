@@ -2,13 +2,18 @@ import 'package:flutter/material.dart';
 
 import 'core/design_system/app_theme.dart';
 import 'core/models/doctor.dart';
-import 'data/mock_data/patient_mock_data.dart';
 import 'data/mock_data/feature_screen_catalog.dart';
+import 'data/mock_data/patient_mock_data.dart';
+import 'data/repositories/appointment_repository.dart';
+import 'data/services/appointment_api_service.dart';
 import 'features/auth/presentation/auth_flow.dart';
+import 'features/doctor/presentation/screens/doctor_appointments_api_screen.dart';
 import 'features/onboarding/presentation/onboarding_screen.dart';
 import 'features/onboarding/presentation/splash_screen.dart';
+import 'features/patient/presentation/screens/booking_flow_screen.dart';
 import 'features/patient/presentation/screens/doctor_profile_screen.dart';
 import 'features/patient/presentation/screens/internal_medicine_screen.dart';
+import 'features/patient/presentation/screens/patient_appointments_api_screen.dart';
 import 'features/patient/presentation/screens/patient_home_screen.dart';
 import 'features/patient/presentation/screens/specialty_search_screen.dart';
 import 'features/shared/presentation/feature_preview_screen.dart';
@@ -26,12 +31,18 @@ abstract final class AppRoutes {
   static const specialties = '/patient/specialties';
   static const internalMedicine = '/patient/specialties/internal-medicine';
   static const doctorProfile = '/patient/doctor-profile';
+  static const bookingApi = '/patient/booking-api';
+  static const patientAppointmentsApi = '/patient/appointments-api';
+  static const doctorAppointmentsApi = '/doctor/appointments-api';
   static const featurePreview = '/feature/preview';
   static const showcase = '/screen-catalog';
 }
 
 class MedicalAppointmentApp extends StatelessWidget {
   const MedicalAppointmentApp({super.key});
+
+  static final AppointmentRepository _appointmentRepository =
+      ApiAppointmentRepository(AppointmentApiService());
 
   @override
   Widget build(BuildContext context) {
@@ -67,10 +78,13 @@ class MedicalAppointmentApp extends StatelessWidget {
                 Navigator.of(context).pushNamed(AppRoutes.specialties),
             onOpenInternalMedicine: () =>
                 Navigator.of(context).pushNamed(AppRoutes.internalMedicine),
-            onOpenBooking: () => _openFeature(context, 'P15'),
+            onOpenBooking: () =>
+                Navigator.of(context).pushNamed(AppRoutes.bookingApi),
             onOpenConsultation: () => _openFeature(context, 'P21'),
             onOpenHealthRecord: () => _openFeature(context, 'P27'),
-            onOpenAppointments: () => _openFeature(context, 'P20'),
+            onOpenAppointments: () =>
+                Navigator.of(context)
+                    .pushNamed(AppRoutes.patientAppointmentsApi),
             onOpenNotifications: () => _openFeature(context, 'P34'),
             onOpenProfile: () => _openFeature(context, 'P36'),
             onOpenCatalog: () =>
@@ -92,7 +106,23 @@ class MedicalAppointmentApp extends StatelessWidget {
                 ? settings.arguments! as Doctor
                 : PatientMockData.doctors.first,
             onBack: () => Navigator.of(context).pop(),
-            onBook: () => _openFeature(context, 'P15'),
+            onBook: () => Navigator.of(context).pushNamed(AppRoutes.bookingApi),
+          ),
+          AppRoutes.bookingApi => BookingFlowScreen(
+            repository: _appointmentRepository,
+            onBack: () => Navigator.of(context).pop(),
+            onViewAppointments: () =>
+                Navigator.of(context)
+                    .pushReplacementNamed(AppRoutes.patientAppointmentsApi),
+          ),
+          AppRoutes.patientAppointmentsApi => PatientAppointmentsApiScreen(
+            repository: _appointmentRepository,
+            onBack: () => Navigator.of(context).pop(),
+            onBook: () => Navigator.of(context).pushNamed(AppRoutes.bookingApi),
+          ),
+          AppRoutes.doctorAppointmentsApi => DoctorAppointmentsApiScreen(
+            repository: _appointmentRepository,
+            onBack: () => Navigator.of(context).pop(),
           ),
           AppRoutes.featurePreview => _buildFeaturePreview(context, settings),
           AppRoutes.showcase => ScreenCatalogScreen(
@@ -116,6 +146,18 @@ class MedicalAppointmentApp extends StatelessWidget {
   }
 
   void _openFeature(BuildContext context, String id) {
+    if (id == 'P15') {
+      Navigator.of(context).pushNamed(AppRoutes.bookingApi);
+      return;
+    }
+    if (id == 'P20') {
+      Navigator.of(context).pushNamed(AppRoutes.patientAppointmentsApi);
+      return;
+    }
+    if (id == 'D04' || id == 'D06') {
+      Navigator.of(context).pushNamed(AppRoutes.doctorAppointmentsApi);
+      return;
+    }
     Navigator.of(context).pushNamed(AppRoutes.featurePreview, arguments: id);
   }
 }

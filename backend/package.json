@@ -1,0 +1,23 @@
+{
+  "name": "medicare-appointment-api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js",
+    "db:setup": "node src/setup-database.js",
+    "db:seed": "node src/setup-database.js",
+    "test": "DATABASE_PATH=./data/test.db node --test"
+  },
+  "dependencies": {
+    "better-sqlite3": "11.10.0",
+    "cors": "2.8.5",
+    "dotenv": "16.6.1",
+    "express": "4.22.3",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "supertest": "7.1.4"
+  }
+}
